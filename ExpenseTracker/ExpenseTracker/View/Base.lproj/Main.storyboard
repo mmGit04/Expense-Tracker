@@ -43,7 +43,7 @@
                                                     <constraint firstAttribute="width" constant="250" id="Qtw-KZ-7J7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -76,6 +76,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="Nfr-b2-2Hd" eventType="touchUpInside" id="JxY-AB-BwP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -90,6 +93,11 @@
                         <viewLayoutGuide key="safeArea" id="Xvo-8W-cCT"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="plus" catalog="system" id="9iN-wh-vNM"/>
+                    <connections>
+                        <outlet property="amountTxtField" destination="4vd-WT-72e" id="Mte-b7-2lZ"/>
+                        <outlet property="noteTxtField" destination="epr-NF-NVD" id="97I-Rg-0pj"/>
+                        <outlet property="typeSegControl" destination="xIA-Dg-wK1" id="Woz-Od-X4s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cEu-lK-Qm8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

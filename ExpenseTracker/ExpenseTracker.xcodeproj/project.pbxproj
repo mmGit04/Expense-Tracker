@@ -15,6 +15,7 @@
 		60D8EAD6252CE6DC009F014C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60D8EAD5252CE6DC009F014C /* Assets.xcassets */; };
 		60D8EAD9252CE6DC009F014C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60D8EAD7252CE6DC009F014C /* LaunchScreen.storyboard */; };
 		60D8EAE5252CF0FD009F014C /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D8EAE4252CF0FD009F014C /* TransactionsVC.swift */; };
+		60D8EAEA252D096E009F014C /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D8EAE9252D096E009F014C /* TransactionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		60D8EAD8252CE6DC009F014C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60D8EADA252CE6DC009F014C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60D8EAE4252CF0FD009F014C /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
+		60D8EAE9252D096E009F014C /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		60D8EAC8252CE6D8009F014C /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
+				60D8EAE8252D0208009F014C /* Enum */,
 				60D8EAE3252CE715009F014C /* Supporting files */,
 				60D8EAE2252CE710009F014C /* Controller */,
 				60D8EAE1252CE70B009F014C /* Model */,
@@ -103,6 +106,14 @@
 				60D8EACB252CE6D8009F014C /* SceneDelegate.swift */,
 			);
 			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		60D8EAE8252D0208009F014C /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				60D8EAE9252D096E009F014C /* TransactionType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +191,7 @@
 				60D8EACA252CE6D8009F014C /* AppDelegate.swift in Sources */,
 				60D8EACC252CE6D8009F014C /* SceneDelegate.swift in Sources */,
 				60D8EAD4252CE6D8009F014C /* ExpenseTracker.xcdatamodeld in Sources */,
+				60D8EAEA252D096E009F014C /* TransactionType.swift in Sources */,
 				60D8EAE5252CF0FD009F014C /* TransactionsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
