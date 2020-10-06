@@ -27,7 +27,7 @@ class AddItemVC: UIViewController {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         save()
-        
+        tabBarController?.selectedIndex = 0
     }
     
     func save() {

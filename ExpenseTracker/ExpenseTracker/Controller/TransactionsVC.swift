@@ -10,6 +10,14 @@ import UIKit
 
 class TransactionsVC: UIViewController {
 
+    // Outlets
+    
+    @IBOutlet weak var currentBalanceLbl: UILabel!
+    @IBOutlet weak var incomeLbl: UILabel!
+    @IBOutlet weak var expenseLbl: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
