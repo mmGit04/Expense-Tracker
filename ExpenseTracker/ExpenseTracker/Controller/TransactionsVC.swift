@@ -9,19 +9,29 @@
 import UIKit
 import CoreData
 
-class TransactionsVC: UIViewController {
+class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
     
     // Outlets
     
     @IBOutlet weak var currentBalanceLbl: UILabel!
     @IBOutlet weak var incomeLbl: UILabel!
     @IBOutlet weak var expenseLbl: UILabel!
-    
+    @IBOutlet weak var transTableView: UITableView!
     var transactions: [Transaction] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        transTableView.delegate = self
+        transTableView.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,4 +73,22 @@ class TransactionsVC: UIViewController {
             debugPrint("Could not fetch: \(error.localizedDescription)")
         }
     }
+    
+    // MARK: Table Data Source and Delegate Methods
+    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//         <#code#>
+//     }
+//
+//     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//         <#code#>
+//     }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        <#code#>
+//    }
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        <#code#>
+//    }
 }

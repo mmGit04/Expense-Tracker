@@ -26,7 +26,7 @@
                                 </segments>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="71P-oc-p8c">
-                                <rect key="frame" x="41.333333333333343" y="131" width="331.66666666666663" height="83"/>
+                                <rect key="frame" x="41.333333333333343" y="131" width="331.66666666666663" height="132"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PG6-1K-WMj">
                                         <rect key="frame" x="0.0" y="0.0" width="331.66666666666669" height="34"/>
@@ -66,10 +66,29 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wnj-dj-XWt">
+                                        <rect key="frame" x="0.0" y="98" width="331.66666666666669" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPm-Uq-bxP">
+                                                <rect key="frame" x="0.0" y="6.9999999999999982" width="61.666666666666664" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QQd-Lf-Xdi">
+                                                <rect key="frame" x="81.666666666666657" y="0.0" width="249.99999999999997" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="YD4-7v-MDU"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcL-Vz-rdf">
-                                <rect key="frame" x="157" y="284" width="100" height="36"/>
+                                <rect key="frame" x="157" y="333" width="100" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="htf-jf-Azv"/>
@@ -95,6 +114,7 @@
                     <tabBarItem key="tabBarItem" title="Add" image="plus" catalog="system" id="9iN-wh-vNM"/>
                     <connections>
                         <outlet property="amountTxtField" destination="4vd-WT-72e" id="Mte-b7-2lZ"/>
+                        <outlet property="dateTxtField" destination="QQd-Lf-Xdi" id="aBM-UZ-pkX"/>
                         <outlet property="noteTxtField" destination="epr-NF-NVD" id="97I-Rg-0pj"/>
                         <outlet property="typeSegControl" destination="xIA-Dg-wK1" id="Woz-Od-X4s"/>
                     </connections>
@@ -179,16 +199,58 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5N4-YE-V5Z">
+                                <rect key="frame" x="0.0" y="258.66666666666674" width="414" height="428.33333333333326"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionCell" id="E9E-BF-qBc" customClass="TransactionCell" customModule="ExpenseTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E9E-BF-qBc" id="h9e-qC-jGH">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="House bills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeW-aA-8TD">
+                                                    <rect key="frame" x="40" y="13" width="102" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crw-9G-yNo">
+                                                    <rect key="frame" x="328.66666666666669" y="13.333333333333334" width="50.333333333333314" height="23.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Crw-9G-yNo" secondAttribute="trailing" constant="15" id="4Gr-yd-Bb5"/>
+                                                <constraint firstItem="Crw-9G-yNo" firstAttribute="centerY" secondItem="h9e-qC-jGH" secondAttribute="centerY" id="JHI-zv-ouV"/>
+                                                <constraint firstItem="VeW-aA-8TD" firstAttribute="leading" secondItem="h9e-qC-jGH" secondAttribute="leadingMargin" constant="20" id="nyQ-u7-HXy"/>
+                                                <constraint firstItem="VeW-aA-8TD" firstAttribute="centerY" secondItem="h9e-qC-jGH" secondAttribute="centerY" id="ukR-nZ-Tcr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="amountLabel" destination="Crw-9G-yNo" id="xbd-u2-bNa"/>
+                                            <outlet property="noteLabel" destination="h9e-qC-jGH" id="JKY-oW-diI"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="IMW-sD-xvZ" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="4c1-mf-0bj"/>
+                            <constraint firstItem="8dj-I8-N1d" firstAttribute="bottom" secondItem="5N4-YE-V5Z" secondAttribute="bottom" id="9mR-ML-NMU"/>
                             <constraint firstItem="DkO-pH-7yz" firstAttribute="top" secondItem="2Q3-NQ-4Op" secondAttribute="bottom" constant="18" id="JRr-vO-cVt"/>
                             <constraint firstItem="IMW-sD-xvZ" firstAttribute="top" secondItem="dtz-Eg-sSh" secondAttribute="bottom" constant="25" id="MJz-gv-um2"/>
+                            <constraint firstItem="5N4-YE-V5Z" firstAttribute="leading" secondItem="8dj-I8-N1d" secondAttribute="leading" id="Quq-HD-LI2"/>
+                            <constraint firstItem="5N4-YE-V5Z" firstAttribute="top" secondItem="DkO-pH-7yz" secondAttribute="bottom" constant="30" id="Sgb-0a-4Qw"/>
                             <constraint firstItem="dtz-Eg-sSh" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="UCy-qy-H92"/>
                             <constraint firstItem="2Q3-NQ-4Op" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="UTP-TN-70h"/>
                             <constraint firstItem="dtz-Eg-sSh" firstAttribute="top" secondItem="8dj-I8-N1d" secondAttribute="top" constant="45" id="i3n-Qm-qwE"/>
                             <constraint firstItem="DkO-pH-7yz" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="kU7-jW-Hvb"/>
+                            <constraint firstItem="8dj-I8-N1d" firstAttribute="trailing" secondItem="5N4-YE-V5Z" secondAttribute="trailing" id="qHd-G1-5h2"/>
                             <constraint firstItem="2Q3-NQ-4Op" firstAttribute="top" secondItem="IMW-sD-xvZ" secondAttribute="bottom" constant="10" id="vXt-pv-o32"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8dj-I8-N1d"/>
@@ -198,11 +260,12 @@
                         <outlet property="currentBalanceLbl" destination="M7u-fs-aCW" id="LkA-xd-jBE"/>
                         <outlet property="expenseLbl" destination="yNF-vo-hVb" id="lL1-cl-1ym"/>
                         <outlet property="incomeLbl" destination="RIA-k4-siK" id="oml-AT-03g"/>
+                        <outlet property="transTableView" destination="5N4-YE-V5Z" id="d3A-xq-f0Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a27-c4-SQ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-329" y="-244"/>
+            <point key="canvasLocation" x="-330.43478260869568" y="-244.56521739130437"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="6Gg-p4-Ufu">
