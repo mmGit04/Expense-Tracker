@@ -75,8 +75,12 @@ class AddItemVC: UIViewController {
             return
         }
     
+        guard let note = noteTxtField.text, noteTxtField.text != "" else  {
+            return
+        }
+        
         transaction.amount = Double(value)!
-        transaction.note = noteTxtField.text
+        transaction.note = note
         transaction.date = dateFormatter.date(from: dateTxtField!.text!)
         
         
