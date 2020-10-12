@@ -36,7 +36,9 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         transTableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         fetchTransactions()
         setupTopBarInfo()
         transTableView.reloadData()

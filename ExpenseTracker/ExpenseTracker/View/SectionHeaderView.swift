@@ -24,7 +24,7 @@ class SectionHeaderView: UITableViewHeaderFooterView {
     private func configureContents() {
        date.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(date)
-
+       // self.contentView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.3921568627, blue: 0.3725490196, alpha: 0.9)
         NSLayoutConstraint.activate([
         date.heightAnchor.constraint(equalToConstant: 30),
         date.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),

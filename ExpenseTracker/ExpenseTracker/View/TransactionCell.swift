@@ -31,7 +31,7 @@ class TransactionCell: UITableViewCell {
         amountLabel.text = "$ " + (String(format: "%.2f", amount))
         noteLabel.text = note
         if type == TransactionType.expense {
-            amountLabel.textColor = #colorLiteral(red: 0.9993608594, green: 0.1497559547, blue: 0, alpha: 1)
+            amountLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.3921568627, blue: 0.3725490196, alpha: 1)
         } else {
             amountLabel.textColor = #colorLiteral(red: 0.03921568627, green: 0.5176470588, blue: 1, alpha: 1)
         }
