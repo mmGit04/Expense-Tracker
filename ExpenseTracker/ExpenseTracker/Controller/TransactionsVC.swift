@@ -21,11 +21,19 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     // Variables
     var sortedTransactions: [Int:[Transaction]] = [:]
     var keyArray: [Int] = []
+    var startOfCurrentMonth: Date {
+        let startDate = Date()
+        let components = NSCalendar.current.dateComponents([.year, .month], from: startDate)
+        let startOfMonth = NSCalendar.current.date(from: components)!
+        return startOfMonth
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         transTableView.delegate = self
         transTableView.dataSource = self
+        transTableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,19 +71,15 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<Transaction>(entityName: "Transaction")
         
-        // Define startOfMonth
-        let startDate = Date()
-        let components = NSCalendar.current.dateComponents([.year, .month], from: startDate)
-        let startOfMonth = NSCalendar.current.date(from: components)!
         
         // Define endOfMonth
         var comps2 = DateComponents()
         comps2.month = 1
         comps2.day = -1
-        let endOfMonth = NSCalendar.current.date(byAdding: comps2, to: startOfMonth)!
+        let endOfMonth = NSCalendar.current.date(byAdding: comps2, to: startOfCurrentMonth)!
         
         
-        let datePredicate = NSPredicate(format: "date >=%@ && date <= %@", startOfMonth as NSDate, endOfMonth as NSDate )
+        let datePredicate = NSPredicate(format: "date >=%@ && date <= %@", startOfCurrentMonth as NSDate, endOfMonth as NSDate )
         
         fetchRequest.predicate = datePredicate
         do {
@@ -131,10 +135,40 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
          return UITableViewCell()
      }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section Header"
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let headerView = transTableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? SectionHeaderView {
+            
+            headerView.setupHeaderDetails(dateValue: getDateForSection(for: section))
+            return headerView
+        }
+       return UIView()
     }
     func numberOfSections(in tableView: UITableView) -> Int {
           return keyArray.count
     }
+    
+    private func getDateForSection(for section: Int) -> String {
+        var dateComp = DateComponents()
+        dateComp.day = keyArray[section]
+        let dateSection = NSCalendar.current.date(byAdding: dateComp, to: startOfCurrentMonth)!
+        let df = DateFormatter()
+        df.dateFormat = "yyyy/MM/dd"
+        return df.string(from: dateSection)
+    }
+    
+    
+    // Implement the footer for section devision
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return CGFloat(integerLiteral: 15)
+//    }
+//    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+//        footerView.backgroundColor = .white
+//        return footerView
+//    }
+//    
+    
+   
 }
