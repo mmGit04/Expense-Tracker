@@ -9,7 +9,9 @@
 import UIKit
 import CoreData
 
-class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+    
+    
     
     
     // Outlets
@@ -19,6 +21,7 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     @IBOutlet weak var amountTxtField: UITextField!
     @IBOutlet weak var dateTxtField: UITextField!
     @IBOutlet weak var categoryCollection: UICollectionView!
+    
     
     // Variables
     private var datePicker: UIDatePicker?
@@ -37,10 +40,8 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         setupDateField()
         categoryCollection.dataSource = self
         categoryCollection.delegate = self
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-//        myView.addGestureRecognizer(tap)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,7 +52,7 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         fetchCategories()
     }
     
-
+    
     
     private func setupDateField() {
         datePicker = UIDatePicker()
@@ -115,14 +116,15 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell {
             cell.setupCategory(title: categories[indexPath.row].title!)
             if let _ = selectedCategory, selectedCategory == categories[indexPath.row] {
-                cell.titleLbl.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+                cell.contentView.backgroundColor = #colorLiteral(red: 0.1482198536, green: 0.54377985, blue: 0.9351093173, alpha: 1)
+            } else {
+                cell.contentView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             }
             return cell
             
@@ -130,12 +132,13 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         return UICollectionViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected")
-    }
-
     
-  
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("Highlighted")
+        selectedCategory = categories[indexPath.row]
+        categoryCollection.reloadData()
+    }
+    
     
     // MARK: Core Data functions
     
@@ -159,28 +162,28 @@ class AddItemVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     private func addNewCategory(title: String) {
         guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-          return
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
         }
         
         
         let managedContext =
-          appDelegate.persistentContainer.viewContext
+            appDelegate.persistentContainer.viewContext
         
         let entity =
-          NSEntityDescription.entity(forEntityName: "Category",
-                                     in: managedContext)!
+            NSEntityDescription.entity(forEntityName: "Category",
+                                       in: managedContext)!
         
         let category = NSManagedObject(entity: entity,
-                                     insertInto: managedContext)
+                                       insertInto: managedContext)
         
         category.setValue(title, forKeyPath: "title")
         
         do {
-          try managedContext.save()
-          categories.append(category as! Category)
+            try managedContext.save()
+            categories.append(category as! Category)
         } catch let error as NSError {
-          print("Could not save. \(error), \(error.userInfo)")
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
 }

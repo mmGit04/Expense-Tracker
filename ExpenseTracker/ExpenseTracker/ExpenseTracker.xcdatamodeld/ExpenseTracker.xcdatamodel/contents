@@ -8,9 +8,10 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="categoryId" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category"/>
     </entity>
     <elements>
-        <element name="Transaction" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Category" positionX="-63" positionY="9" width="128" height="58"/>
+        <element name="Transaction" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="Category" positionX="122.05078125" positionY="82.06640625" width="128" height="58"/>
     </elements>
 </model>

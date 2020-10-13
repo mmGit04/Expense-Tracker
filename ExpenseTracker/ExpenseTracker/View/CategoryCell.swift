@@ -11,11 +11,11 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     // Outlets
-    @IBOutlet weak var titleLbl: UILabel!
 
+    @IBOutlet weak var titleLabel: UILabel!
     
     public func setupCategory(title: String) {
-        titleLbl.text = title
+        titleLabel.text = title
         contentView.layer.cornerRadius = 15
         contentView.layer.borderWidth = 1.0
         contentView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

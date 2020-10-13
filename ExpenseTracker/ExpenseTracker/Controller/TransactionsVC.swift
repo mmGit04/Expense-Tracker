@@ -158,8 +158,7 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         df.dateFormat = "yyyy/MM/dd"
         return df.string(from: dateSection)
     }
-    
-    
+
     // Implement the footer for section devision
 //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 //        return CGFloat(integerLiteral: 15)
