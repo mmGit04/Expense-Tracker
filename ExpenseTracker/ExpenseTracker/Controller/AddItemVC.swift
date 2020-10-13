@@ -96,8 +96,10 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         transaction.amount = Double(value)!
         transaction.note = note
         transaction.date = dateFormatter.date(from: dateTxtField!.text!)
-        
-        
+        if let category = selectedCategory {
+             transaction.categoryId = category
+        }
+       
         if typeSegControl.selectedSegmentIndex == 0 {
             transaction.type = TransactionType.income.rawValue
         } else {
