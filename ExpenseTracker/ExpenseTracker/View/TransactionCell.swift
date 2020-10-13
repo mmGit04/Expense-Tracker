@@ -16,6 +16,7 @@ class TransactionCell: UITableViewCell {
 
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,9 +28,10 @@ class TransactionCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setupCell(amount: Double, note: String?, type: TransactionType) {
+    func setupCell(amount: Double, note: String?, type: TransactionType, category: String) {
         amountLabel.text = "$ " + (String(format: "%.2f", amount))
         noteLabel.text = note
+        categoryLabel.text = category
         if type == TransactionType.expense {
             amountLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.3921568627, blue: 0.3725490196, alpha: 1)
         } else {

@@ -124,7 +124,7 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         if let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell {
             cell.setupCategory(title: categories[indexPath.row].title!)
             if let _ = selectedCategory, selectedCategory == categories[indexPath.row] {
-                cell.contentView.backgroundColor = #colorLiteral(red: 0.1482198536, green: 0.54377985, blue: 0.9351093173, alpha: 1)
+                cell.contentView.backgroundColor = #colorLiteral(red: 0.1482198536, green: 0.54377985, blue: 0.9333333333, alpha: 0.5)
             } else {
                 cell.contentView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             }

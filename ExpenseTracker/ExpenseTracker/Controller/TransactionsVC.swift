@@ -130,7 +130,7 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         if let cell = transTableView.dequeueReusableCell(withIdentifier: "transactionCell") as? TransactionCell {
             let transactions = sortedTransactions[keyArray[indexPath.section]] ?? []
             let transaction = transactions[indexPath.row]
-            cell.setupCell(amount: transaction.amount, note: transaction.note, type: TransactionType.init(rawValue: transaction.type!)!)
+            cell.setupCell(amount: transaction.amount, note: transaction.note, type: TransactionType.init(rawValue: transaction.type!)!, category: transaction.categoryId?.title ?? "")
             return cell
             
         }
