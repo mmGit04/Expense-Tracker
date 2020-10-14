@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-   
+    
     // Outlets
     
     @IBOutlet weak var currentBalanceLbl: UILabel!
@@ -27,7 +27,7 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         let startOfMonth = NSCalendar.current.date(from: components)!
         return startOfMonth
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,9 +124,9 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedTransactions[keyArray[section]]?.count ?? 0
-     }
-
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = transTableView.dequeueReusableCell(withIdentifier: "transactionCell") as? TransactionCell {
             let transactions = sortedTransactions[keyArray[indexPath.section]] ?? []
             let transaction = transactions[indexPath.row]
@@ -134,21 +134,26 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
             return cell
             
         }
-         return UITableViewCell()
-     }
-
+        return UITableViewCell()
+    }
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerView = transTableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? SectionHeaderView {
             
-            headerView.setupHeaderDetails(dateValue: getDateForSection(for: section))
+            let sumIncome = getSumForSection(for: section, type: TransactionType.income)
+            let sumExpense = getSumForSection(for: section, type: TransactionType.expense)
+            headerView.setupHeaderDetails(dateValue: getDateForSection(for: section),sectionIncome: sumIncome, sectionExpense: sumExpense )
             return headerView
         }
-       return UIView()
+        return UIView()
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-          return keyArray.count
+        return keyArray.count
     }
+    
+    // MARK: Helpers
     
     private func getDateForSection(for section: Int) -> String {
         var dateComp = DateComponents()
@@ -158,18 +163,32 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         df.dateFormat = "yyyy/MM/dd"
         return df.string(from: dateSection)
     }
-
-    // Implement the footer for section devision
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return CGFloat(integerLiteral: 15)
-//    }
-//    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//        footerView.backgroundColor = .white
-//        return footerView
-//    }
-//    
     
-   
+    private func getSumForSection(for section: Int, type: TransactionType) -> Double {
+        let dateKey = keyArray[section]
+        var sum = 0.0
+        if let transactions = sortedTransactions[dateKey] {
+            for transaction in transactions {
+                if transaction.type == type.rawValue {
+                    sum += transaction.amount
+                }
+            }
+        }
+        return sum
+    }
+    
+    
+    // Implement the footer for section devision
+    //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    //        return CGFloat(integerLiteral: 15)
+    //    }
+    //
+    //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    //        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    //        footerView.backgroundColor = .white
+    //        return footerView
+    //    }
+    //
+    
+    
 }

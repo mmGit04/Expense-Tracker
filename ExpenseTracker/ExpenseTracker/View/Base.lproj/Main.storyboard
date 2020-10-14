@@ -169,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cEu-lK-Qm8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-330.43478260869568" y="413.31521739130437"/>
+            <point key="canvasLocation" x="-204" y="840"/>
         </scene>
         <!--Trans.-->
         <scene sceneID="R62-Nf-GDR">
@@ -259,9 +259,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transportation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61K-nk-poY">
-                                                    <rect key="frame" x="20" y="16.666666666666664" width="70" height="16.666666666666664"/>
+                                                    <rect key="frame" x="20" y="16.666666666666664" width="60" height="16.666666666666664"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="1Ed-2O-AkW"/>
+                                                        <constraint firstAttribute="width" constant="60" id="3GZ-Vn-ls7"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -274,7 +274,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="House bills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeW-aA-8TD">
-                                                    <rect key="frame" x="100" y="16.333333333333329" width="74" height="17.666666666666671"/>
+                                                    <rect key="frame" x="90" y="16.333333333333329" width="74" height="17.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -325,7 +325,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a27-c4-SQ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-330.43478260869568" y="-244.56521739130437"/>
+            <point key="canvasLocation" x="-203" y="-653"/>
+        </scene>
+        <!--Stats-->
+        <scene sceneID="zut-rr-3FH">
+            <objects>
+                <viewController id="ciW-zf-bQD" customClass="ChartVC" customModule="ExpenseTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dLp-xK-SWZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="mF7-cW-7sL"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Stats" image="chart.bar" catalog="system" id="0Hu-a9-IdU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fux-ao-xf2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-204" y="60"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="6Gg-p4-Ufu">
@@ -340,6 +356,7 @@
                     <connections>
                         <segue destination="WUY-Vk-nOn" kind="relationship" relationship="viewControllers" id="7aP-1x-RPt"/>
                         <segue destination="Nfr-b2-2Hd" kind="relationship" relationship="viewControllers" id="odM-KV-onU"/>
+                        <segue destination="ciW-zf-bQD" kind="relationship" relationship="viewControllers" id="z8F-Vs-r2T"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMO-41-IvC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -348,6 +365,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chart.bar" catalog="system" width="128" height="90"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
