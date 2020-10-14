@@ -334,10 +334,27 @@
                     <view key="view" contentMode="scaleToFill" id="dLp-xK-SWZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1LW-IU-Zs8" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="10" width="414" height="250"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="XcI-fx-hNo"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1LW-IU-Zs8" firstAttribute="top" secondItem="mF7-cW-7sL" secondAttribute="top" constant="10" id="EzI-uD-FhX"/>
+                            <constraint firstItem="mF7-cW-7sL" firstAttribute="trailing" secondItem="1LW-IU-Zs8" secondAttribute="trailing" id="Rv9-SI-ZR1"/>
+                            <constraint firstItem="1LW-IU-Zs8" firstAttribute="leading" secondItem="mF7-cW-7sL" secondAttribute="leading" id="jj7-Cn-u9Z"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mF7-cW-7sL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Stats" image="chart.bar" catalog="system" id="0Hu-a9-IdU"/>
+                    <connections>
+                        <outlet property="pieChartView" destination="1LW-IU-Zs8" id="Y86-bz-jVI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fux-ao-xf2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
