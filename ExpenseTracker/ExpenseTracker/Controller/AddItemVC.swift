@@ -9,15 +9,13 @@
 import UIKit
 
 class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
-
-    // Outlets
     
+    // Outlets
     @IBOutlet weak var typeSegControl: UISegmentedControl!
     @IBOutlet weak var noteTxtField: UITextField!
     @IBOutlet weak var amountTxtField: UITextField!
     @IBOutlet weak var dateTxtField: UITextField!
     @IBOutlet weak var categoryCollection: UICollectionView!
-    
     
     // Variables
     private var datePicker: UIDatePicker?
@@ -32,12 +30,12 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
-        setupDateField()
         categoryCollection.dataSource = self
         categoryCollection.delegate = self
+        setupDateField()
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,8 +46,6 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         categories = CoreDataManager.instance.fetchCategories()
     }
     
-    
-    
     private func setupDateField() {
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
@@ -59,11 +55,10 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         view.addGestureRecognizer(dateTapGesture)
     }
     
-    
-    
     @objc func dateTapped(gestureRecognizer: UITapGestureRecognizer){
         view.endEditing(true)
     }
+    
     @objc func dateChanged(datePicker: UIDatePicker){
         dateTxtField.text = dateFormatter.string(from: datePicker.date)
     }
@@ -73,16 +68,15 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         tabBarController?.selectedIndex = 0
     }
     
-    
-    func saveItem() {
+    private func saveItem() {
         guard let value = amountTxtField.text, amountTxtField.text != "" else  {
             return
         }
-        
         guard let note = noteTxtField.text, noteTxtField.text != "" else  {
             return
         }
-        let date = dateTxtField!.text!
+        
+        let date = dateTxtField.text!
         let type: String
         if typeSegControl.selectedSegmentIndex == 0 {
             type = TransactionType.income.rawValue
@@ -92,10 +86,7 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         CoreDataManager.instance.save(value, note, date, selectedCategory, type)
     }
     
-    
-    
     // MARK: Collection View Data Source and Delegate methods
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
@@ -109,9 +100,7 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                 cell.contentView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             }
             return cell
-            
         }
-         
         return UICollectionViewCell()
     }
     
@@ -125,7 +114,5 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
         categoryCollection.reloadData()
     }
-    
-
 }
 
