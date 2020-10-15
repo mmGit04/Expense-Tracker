@@ -106,7 +106,7 @@ class ChartVC: UIViewController {
     }
     
     func sortTransactionByCategory(for transactions: [Transaction]) {
-        
+        categoryTransactions = [:]
         // Setup categoryTransactions
         for trans in transactions {
             let category = trans.categoryId
