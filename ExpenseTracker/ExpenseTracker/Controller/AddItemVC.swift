@@ -120,7 +120,11 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted")
-        selectedCategory = categories[indexPath.row]
+        if selectedCategory == categories[indexPath.row] {
+            selectedCategory = nil
+        } else {
+            selectedCategory = categories[indexPath.row]
+        }
         categoryCollection.reloadData()
     }
     
