@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -39,11 +38,15 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchTransactions()
+        fetchSortedTransactions()
         setupTopBarInfo()
         transTableView.reloadData()
     }
     
+    private func fetchSortedTransactions() {
+        let transactions = CoreDataManager.instance.fetchTransactions()
+        sortTransactions(transactions: transactions)
+    }
     
     func setupTopBarInfo() {
         var income = 0.0
@@ -63,35 +66,6 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         currentBalanceLbl.text = String(format: "%.2f", income - expense)
     }
     
-    // Fetchin current's month transactions
-    func fetchTransactions() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<Transaction>(entityName: "Transaction")
-        
-        
-        // Define endOfMonth
-        var comps2 = DateComponents()
-        comps2.month = 1
-        comps2.day = -1
-        let endOfMonth = NSCalendar.current.date(byAdding: comps2, to: startOfCurrentMonth)!
-        
-        
-        let datePredicate = NSPredicate(format: "date >=%@ && date <= %@", startOfCurrentMonth as NSDate, endOfMonth as NSDate )
-        
-        fetchRequest.predicate = datePredicate
-        do {
-            let transactions = try managedContext.fetch(fetchRequest)
-            sortTransactions(transactions: transactions)
-            print("Successfully fetched data.")
-        } catch {
-            debugPrint("Could not fetch: \(error.localizedDescription)")
-        }
-    }
     
     // Sort transactions
     private func sortTransactions(transactions: [Transaction]) {
@@ -110,7 +84,6 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
-        
         // Setup keyArray
         for key in sortedTransactions.keys {
             keyArray.append(Int(key))

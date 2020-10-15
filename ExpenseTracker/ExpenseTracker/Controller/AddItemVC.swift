@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
@@ -49,7 +48,7 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         noteTxtField.text = nil
         amountTxtField.text = nil
         dateTxtField.text = dateFormatter.string(from: Date())
-        fetchCategories()
+        categories = CoreDataManager.instance.fetchCategories()
     }
     
     
@@ -73,18 +72,12 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        save()
+        saveItem()
         tabBarController?.selectedIndex = 0
     }
     
-    func save() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let transaction = Transaction(context: managedContext)
-        
+    
+    func saveItem() {
         guard let value = amountTxtField.text, amountTxtField.text != "" else  {
             return
         }
@@ -92,27 +85,17 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         guard let note = noteTxtField.text, noteTxtField.text != "" else  {
             return
         }
-        
-        transaction.amount = Double(value)!
-        transaction.note = note
-        transaction.date = dateFormatter.date(from: dateTxtField!.text!)
-        if let category = selectedCategory {
-             transaction.categoryId = category
-        }
-       
+        let date = dateTxtField!.text!
+        let type: String
         if typeSegControl.selectedSegmentIndex == 0 {
-            transaction.type = TransactionType.income.rawValue
+            type = TransactionType.income.rawValue
         } else {
-            transaction.type = TransactionType.expense.rawValue
+            type = TransactionType.expense.rawValue
         }
-        do {
-            try managedContext.save()
-            print("Succcesfully saved data.")
-        } catch {
-            debugPrint("Could not save transaction.")
-        }
-        
+        CoreDataManager.instance.save(value, note, date, selectedCategory, type)
     }
+    
+    
     
     // MARK: Collection View Data Source and Delegate methods
     
@@ -141,52 +124,6 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         categoryCollection.reloadData()
     }
     
-    
-    // MARK: Core Data functions
-    
-    private func fetchCategories() {
-        categories.removeAll()
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
-        
-        do {
-            categories = try managedContext.fetch(fetchRequest)
-            print("Successfully fetched categories.")
-        } catch {
-            debugPrint("Could not fetch: \(error.localizedDescription)")
-        }
-    }
-    
-    private func addNewCategory(title: String) {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Category",
-                                       in: managedContext)!
-        
-        let category = NSManagedObject(entity: entity,
-                                       insertInto: managedContext)
-        
-        category.setValue(title, forKeyPath: "title")
-        
-        do {
-            try managedContext.save()
-            categories.append(category as! Category)
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
+
 }
 

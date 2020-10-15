@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00626D5A6217F317288A1DAD /* Pods_ExpenseTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C083E91575BD2603A6A80405 /* Pods_ExpenseTracker.framework */; };
 		603316402536DD8400F8DC7A /* ChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6033163F2536DD8400F8DC7A /* ChartVC.swift */; };
+		6078C445253861770020B123 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078C444253861770020B123 /* CoreDataManager.swift */; };
 		609F29A4252F3B3F0020A3B5 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609F29A3252F3B3F0020A3B5 /* TransactionCell.swift */; };
 		60B778E1253476F000A423FE /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B778E0253476F000A423FE /* SectionHeaderView.swift */; };
 		60B778E32534D3BA00A423FE /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B778E22534D3BA00A423FE /* CategoryCell.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		6033163F2536DD8400F8DC7A /* ChartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartVC.swift; sourceTree = "<group>"; };
+		6078C444253861770020B123 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		609F29A3252F3B3F0020A3B5 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		60B778E0253476F000A423FE /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		60B778E22534D3BA00A423FE /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -62,8 +64,15 @@
 				7292555D5C5E7E613E69F8C9 /* Pods-ExpenseTracker.debug.xcconfig */,
 				F30F4AC43AC5A07A323D1D36 /* Pods-ExpenseTracker.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		6078C4432538615F0020B123 /* DatabaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				6078C444253861770020B123 /* CoreDataManager.swift */,
+			);
+			path = DatabaseManager;
 			sourceTree = "<group>";
 		};
 		60D8EABD252CE6D8009F014C = {
@@ -87,6 +96,7 @@
 		60D8EAC8252CE6D8009F014C /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
+				6078C4432538615F0020B123 /* DatabaseManager */,
 				60D8EAE8252D0208009F014C /* Enum */,
 				60D8EAE3252CE715009F014C /* Supporting files */,
 				60D8EAE2252CE710009F014C /* Controller */,
@@ -278,6 +288,7 @@
 				60D8EAEA252D096E009F014C /* TransactionType.swift in Sources */,
 				60D8EAE5252CF0FD009F014C /* TransactionsVC.swift in Sources */,
 				603316402536DD8400F8DC7A /* ChartVC.swift in Sources */,
+				6078C445253861770020B123 /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
