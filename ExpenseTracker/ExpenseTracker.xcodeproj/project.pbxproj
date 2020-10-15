@@ -10,6 +10,7 @@
 		00626D5A6217F317288A1DAD /* Pods_ExpenseTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C083E91575BD2603A6A80405 /* Pods_ExpenseTracker.framework */; };
 		603316402536DD8400F8DC7A /* ChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6033163F2536DD8400F8DC7A /* ChartVC.swift */; };
 		6078C445253861770020B123 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078C444253861770020B123 /* CoreDataManager.swift */; };
+		6078C44725388F8E0020B123 /* DetailCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6078C44625388F8E0020B123 /* DetailCategoryCell.swift */; };
 		609F29A4252F3B3F0020A3B5 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609F29A3252F3B3F0020A3B5 /* TransactionCell.swift */; };
 		60B778E1253476F000A423FE /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B778E0253476F000A423FE /* SectionHeaderView.swift */; };
 		60B778E32534D3BA00A423FE /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B778E22534D3BA00A423FE /* CategoryCell.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		6033163F2536DD8400F8DC7A /* ChartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartVC.swift; sourceTree = "<group>"; };
 		6078C444253861770020B123 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		6078C44625388F8E0020B123 /* DetailCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategoryCell.swift; sourceTree = "<group>"; };
 		609F29A3252F3B3F0020A3B5 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		60B778E0253476F000A423FE /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		60B778E22534D3BA00A423FE /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				609F29A3252F3B3F0020A3B5 /* TransactionCell.swift */,
 				60B778E0253476F000A423FE /* SectionHeaderView.swift */,
 				60B778E22534D3BA00A423FE /* CategoryCell.swift */,
+				6078C44625388F8E0020B123 /* DetailCategoryCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				60D8EACE252CE6D8009F014C /* AddItemVC.swift in Sources */,
 				60D8EACA252CE6D8009F014C /* AppDelegate.swift in Sources */,
 				60B778E1253476F000A423FE /* SectionHeaderView.swift in Sources */,
+				6078C44725388F8E0020B123 /* DetailCategoryCell.swift in Sources */,
 				60D8EACC252CE6D8009F014C /* SceneDelegate.swift in Sources */,
 				60B778E32534D3BA00A423FE /* CategoryCell.swift in Sources */,
 				60D8EAD4252CE6D8009F014C /* ExpenseTracker.xcdatamodeld in Sources */,
