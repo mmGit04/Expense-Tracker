@@ -9,10 +9,7 @@
 import UIKit
 
 class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
-    
-    
-    
-    
+
     // Outlets
     
     @IBOutlet weak var typeSegControl: UISegmentedControl!
@@ -114,6 +111,7 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             return cell
             
         }
+         
         return UICollectionViewCell()
     }
     

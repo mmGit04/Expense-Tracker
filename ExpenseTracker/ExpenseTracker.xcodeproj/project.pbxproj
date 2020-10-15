@@ -98,8 +98,6 @@
 		60D8EAC8252CE6D8009F014C /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
-				6078C4432538615F0020B123 /* DatabaseManager */,
-				60D8EAE8252D0208009F014C /* Enum */,
 				60D8EAE3252CE715009F014C /* Supporting files */,
 				60D8EAE2252CE710009F014C /* Controller */,
 				60D8EAE1252CE70B009F014C /* Model */,
@@ -127,6 +125,8 @@
 		60D8EAE1252CE70B009F014C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				60D8EAE8252D0208009F014C /* Enum */,
+				6078C4432538615F0020B123 /* DatabaseManager */,
 			);
 			path = Model;
 			sourceTree = "<group>";

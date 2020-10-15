@@ -14,6 +14,10 @@ class CoreDataManager {
     
     static let instance = CoreDataManager()
     
+    // Create a singleton
+    private init() {
+    }
+    
     private var dateFormatter: DateFormatter = {
         let dateF = DateFormatter()
         dateF.dateFormat = "MM/dd/yyyy"

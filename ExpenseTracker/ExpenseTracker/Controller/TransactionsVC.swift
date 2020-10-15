@@ -11,25 +11,25 @@ import UIKit
 class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Outlets
-    
     @IBOutlet weak var currentBalanceLbl: UILabel!
     @IBOutlet weak var incomeLbl: UILabel!
     @IBOutlet weak var expenseLbl: UILabel!
     @IBOutlet weak var transTableView: UITableView!
     
     // Variables
-    var sortedTransactions: [Int:[Transaction]] = [:]
-    var keyArray: [Int] = []
-    var startOfCurrentMonth: Date {
+    private var sortedTransactions: [Int:[Transaction]] = [:]
+    private var keyArray: [Int] = []
+    private var startOfCurrentMonth: Date {
         let startDate = Date()
         let components = NSCalendar.current.dateComponents([.year, .month], from: startDate)
         let startOfMonth = NSCalendar.current.date(from: components)!
         return startOfMonth
     }
     
-    
+    // View Controller life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         transTableView.delegate = self
         transTableView.dataSource = self
         transTableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
@@ -43,12 +43,38 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         transTableView.reloadData()
     }
     
+    
     private func fetchSortedTransactions() {
         let transactions = CoreDataManager.instance.fetchTransactions()
-        sortTransactions(transactions: transactions)
+        sortTransactions(transactions)
     }
     
-    func setupTopBarInfo() {
+    // Sort transactions
+    private func sortTransactions(_ transactions: [Transaction]) {
+        // Empty out the variables
+        keyArray = []
+        sortedTransactions = [:]
+        
+        // Setup sortedTransactions
+        for trans in transactions {
+            let dayComponent = NSCalendar.current.dateComponents([.day], from: trans.date!)
+            if let day = dayComponent.day {
+                if sortedTransactions[day] != nil {
+                    sortedTransactions[day]!.append(contentsOf: [trans])
+                } else {
+                    sortedTransactions[day] = [trans]
+                }
+            }
+        }
+        // Setup keyArray
+        for key in sortedTransactions.keys {
+            keyArray.append(Int(key))
+        }
+        keyArray.sort(by: >)
+    }
+    
+    // MARK: Setup View
+    private func setupTopBarInfo() {
         var income = 0.0
         var expense = 0.0
         for day in sortedTransactions.keys {
@@ -60,60 +86,28 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
-        
-        incomeLbl.text = "$ " + String(format: "%.2f", income)
-        expenseLbl.text = "$ " + String(format: "%.2f", expense)
-        currentBalanceLbl.text = String(format: "%.2f", income - expense)
+        incomeLbl.text = "$ \(income)"
+        expenseLbl.text = "$ \(expense)"
+        currentBalanceLbl.text = String(income - expense)
     }
-    
-    
-    // Sort transactions
-    private func sortTransactions(transactions: [Transaction]) {
-        // Empty out the variables
-        keyArray = []
-        sortedTransactions = [:]
-        
-        // Setup sortedTransactions
-        for trans in transactions {
-            let dayComponent = NSCalendar.current.dateComponents([.day], from: trans.date!)
-            if let day = dayComponent.day {
-                if sortedTransactions[day] != nil {
-                    sortedTransactions[day]?.append(contentsOf: [trans])
-                } else {
-                    sortedTransactions[day] = [trans]
-                }
-            }
-        }
-        // Setup keyArray
-        for key in sortedTransactions.keys {
-            keyArray.append(Int(key))
-        }
-        keyArray.sort(by: >)
-        
-    }
-    
     
     // MARK: Table Data Source and Delegate Methods
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedTransactions[keyArray[section]]?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = transTableView.dequeueReusableCell(withIdentifier: "transactionCell") as? TransactionCell {
-            let transactions = sortedTransactions[keyArray[indexPath.section]] ?? []
+            let transactions = sortedTransactions[keyArray[indexPath.section]]!
             let transaction = transactions[indexPath.row]
             cell.setupCell(amount: transaction.amount, note: transaction.note, type: TransactionType.init(rawValue: transaction.type!)!, category: transaction.categoryId?.title ?? "")
             return cell
-            
         }
         return UITableViewCell()
     }
     
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerView = transTableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? SectionHeaderView {
-            
             let sumIncome = getSumForSection(for: section, type: TransactionType.income)
             let sumExpense = getSumForSection(for: section, type: TransactionType.expense)
             headerView.setupHeaderDetails(dateValue: getDateForSection(for: section),sectionIncome: sumIncome, sectionExpense: sumExpense )
@@ -127,7 +121,6 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // MARK: Helpers
-    
     private func getDateForSection(for section: Int) -> String {
         var dateComp = DateComponents()
         dateComp.day = keyArray[section]
