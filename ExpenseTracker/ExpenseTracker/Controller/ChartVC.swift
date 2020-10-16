@@ -117,6 +117,9 @@ class ChartVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         pieChartView.usePercentValuesEnabled = true
         pieChartView.entryLabelColor = UIColor.black
         pieChartView.legend.enabled = false
+        pieChartView.noDataText = "There is no data do present"
+        pieChartView.noDataTextColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
         currentSetOfColors = Generator.generateRandomColors(numbersOfColor: categoryAmount.count)
         
         var dataEntries: [ChartDataEntry] = []

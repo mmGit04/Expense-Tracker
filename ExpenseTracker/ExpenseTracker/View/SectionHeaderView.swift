@@ -31,7 +31,7 @@ class SectionHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(date)
         contentView.addSubview(sumIncome)
         contentView.addSubview(sumExpense)
-        
+        contentView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 0.2)
         // Setup date label
         NSLayoutConstraint.activate([
             date.heightAnchor.constraint(equalToConstant: 30),

@@ -42,6 +42,8 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         
         noteTxtField.text = nil
         amountTxtField.text = nil
+        noteTxtField.placeholder = "Note"
+        amountTxtField.placeholder = "Amount"
         dateTxtField.text = dateFormatter.string(from: Date())
         categories = CoreDataManager.instance.fetchCategories()
     }
