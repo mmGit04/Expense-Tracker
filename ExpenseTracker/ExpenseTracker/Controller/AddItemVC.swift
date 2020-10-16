@@ -88,31 +88,64 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: Collection View Data Source and Delegate methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categories.count
+        return categories.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell {
-            cell.setupCategory(title: categories[indexPath.row].title!)
-            if let _ = selectedCategory, selectedCategory == categories[indexPath.row] {
-                cell.contentView.backgroundColor = #colorLiteral(red: 0.1482198536, green: 0.54377985, blue: 0.9333333333, alpha: 0.5)
-            } else {
-                cell.contentView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        // Creating Add category cell
+        if (indexPath.row == categories.count) {
+            if let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "CategoryAddCell", for: indexPath) as? CategoryAddCell {
+                cell.setupCell()
+                return cell
             }
-            return cell
+            
+        } else {
+            if let cell = categoryCollection.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell {
+                cell.setupCategory(title: categories[indexPath.row].title!)
+                if let _ = selectedCategory, selectedCategory == categories[indexPath.row] {
+                    cell.contentView.backgroundColor = #colorLiteral(red: 0.1482198536, green: 0.54377985, blue: 0.9333333333, alpha: 0.5)
+                } else {
+                    cell.contentView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                }
+                return cell
+            }
         }
+        
         return UICollectionViewCell()
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted")
-        if selectedCategory == categories[indexPath.row] {
-            selectedCategory = nil
+        if (indexPath.row == categories.count) {
+            presentAlert()
         } else {
-            selectedCategory = categories[indexPath.row]
+            if selectedCategory == categories[indexPath.row] {
+                selectedCategory = nil
+            } else {
+                selectedCategory = categories[indexPath.row]
+            }
+            categoryCollection.reloadData()
         }
-        categoryCollection.reloadData()
+    }
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: "Add new category", message: nil , preferredStyle: .alert )
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction( title: "Add", style: .default) { (action: UIAlertAction) -> Void in
+            // Add new category if title is filled
+            if let tf = alert.textFields?.first, tf.text != nil, tf.text != "" {
+                CoreDataManager.instance.addNewCategory(title: tf.text!)
+                self.categories = CoreDataManager.instance.fetchCategories()
+                self.categoryCollection.reloadData()
+                print("Add pressed")
+                }
+            })
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Enter category title"
+        })
+        present(alert, animated: true, completion: nil)
     }
 }
 

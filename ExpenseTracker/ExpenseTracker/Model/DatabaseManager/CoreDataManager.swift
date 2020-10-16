@@ -106,7 +106,7 @@ struct CoreDataManager {
         return categories
     }
     
-    private func addNewCategory(title: String)  {
+    public func addNewCategory(title: String)  {
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
