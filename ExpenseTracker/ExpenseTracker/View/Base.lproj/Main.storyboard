@@ -179,8 +179,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT BALANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtz-Eg-sSh">
-                                <rect key="frame" x="128" y="45" width="158.33333333333337" height="20.333333333333329"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MONTHLY BALANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtz-Eg-sSh">
+                                <rect key="frame" x="126.66666666666669" y="45" width="161" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -202,12 +202,6 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="September 2020." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Q3-NQ-4Op">
-                                <rect key="frame" x="140.33333333333337" y="141.33333333333334" width="133.66666666666663" height="20.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="200" translatesAutoresizingMaskIntoConstraints="NO" id="DkO-pH-7yz">
                                 <rect key="frame" x="40.333333333333343" y="179.66666666666666" width="333.33333333333326" height="49"/>
                                 <subviews>
@@ -297,27 +291,59 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="49Y-KK-lhg">
+                                <rect key="frame" x="120.33333333333333" y="140" width="173.66666666666669" height="22"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AXp-fQ-dwC">
+                                        <rect key="frame" x="0.0" y="0.0" width="15" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="AJR-V2-OKG"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="chevron.left" catalog="system"/>
+                                        <connections>
+                                            <action selector="changeMonthArrowPressed:" destination="WUY-Vk-nOn" eventType="touchUpInside" id="6Ev-ht-MtF"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="September 2020." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Q3-NQ-4Op">
+                                        <rect key="frame" x="20.000000000000014" y="0.0" width="133.66666666666669" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92L-72-yAi">
+                                        <rect key="frame" x="158.66666666666669" y="0.0" width="15" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="U4R-nR-Mqe"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="chevron.right" catalog="system"/>
+                                        <connections>
+                                            <action selector="changeMonthArrowPressed:" destination="WUY-Vk-nOn" eventType="touchUpInside" id="TwB-un-6pF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IMW-sD-xvZ" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="4c1-mf-0bj"/>
                             <constraint firstItem="8dj-I8-N1d" firstAttribute="bottom" secondItem="5N4-YE-V5Z" secondAttribute="bottom" id="9mR-ML-NMU"/>
-                            <constraint firstItem="DkO-pH-7yz" firstAttribute="top" secondItem="2Q3-NQ-4Op" secondAttribute="bottom" constant="18" id="JRr-vO-cVt"/>
                             <constraint firstItem="IMW-sD-xvZ" firstAttribute="top" secondItem="dtz-Eg-sSh" secondAttribute="bottom" constant="25" id="MJz-gv-um2"/>
                             <constraint firstItem="5N4-YE-V5Z" firstAttribute="leading" secondItem="8dj-I8-N1d" secondAttribute="leading" id="Quq-HD-LI2"/>
                             <constraint firstItem="5N4-YE-V5Z" firstAttribute="top" secondItem="DkO-pH-7yz" secondAttribute="bottom" constant="30" id="Sgb-0a-4Qw"/>
+                            <constraint firstItem="49Y-KK-lhg" firstAttribute="top" secondItem="IMW-sD-xvZ" secondAttribute="bottom" constant="8.6666666666666856" id="Si0-Uh-Cw3"/>
                             <constraint firstItem="dtz-Eg-sSh" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="UCy-qy-H92"/>
-                            <constraint firstItem="2Q3-NQ-4Op" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="UTP-TN-70h"/>
+                            <constraint firstItem="DkO-pH-7yz" firstAttribute="top" secondItem="49Y-KK-lhg" secondAttribute="bottom" constant="17.666666666666657" id="bzz-Qs-AbS"/>
+                            <constraint firstItem="49Y-KK-lhg" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="dzV-YD-HZu"/>
                             <constraint firstItem="dtz-Eg-sSh" firstAttribute="top" secondItem="8dj-I8-N1d" secondAttribute="top" constant="45" id="i3n-Qm-qwE"/>
                             <constraint firstItem="DkO-pH-7yz" firstAttribute="centerX" secondItem="vQW-Zj-pyb" secondAttribute="centerX" id="kU7-jW-Hvb"/>
                             <constraint firstItem="8dj-I8-N1d" firstAttribute="trailing" secondItem="5N4-YE-V5Z" secondAttribute="trailing" id="qHd-G1-5h2"/>
-                            <constraint firstItem="2Q3-NQ-4Op" firstAttribute="top" secondItem="IMW-sD-xvZ" secondAttribute="bottom" constant="10" id="vXt-pv-o32"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8dj-I8-N1d"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Trans." image="list.bullet" catalog="system" id="HTq-nO-tIa"/>
                     <connections>
                         <outlet property="currentBalanceLbl" destination="M7u-fs-aCW" id="LkA-xd-jBE"/>
+                        <outlet property="currentDateLbl" destination="2Q3-NQ-4Op" id="reQ-7Y-D3G"/>
                         <outlet property="expenseLbl" destination="yNF-vo-hVb" id="lL1-cl-1ym"/>
                         <outlet property="incomeLbl" destination="RIA-k4-siK" id="oml-AT-03g"/>
                         <outlet property="transTableView" destination="5N4-YE-V5Z" id="d3A-xq-f0Z"/>
@@ -452,6 +478,8 @@
     </scenes>
     <resources>
         <image name="chart.bar" catalog="system" width="128" height="90"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="plus" catalog="system" width="128" height="113"/>
     </resources>

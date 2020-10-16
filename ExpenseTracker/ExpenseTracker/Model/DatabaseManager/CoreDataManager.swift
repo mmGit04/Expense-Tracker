@@ -12,7 +12,7 @@ import CoreData
 
 struct CoreDataManager {
     
-    static let instance = CoreDataManager()
+    static var instance = CoreDataManager()
     
     // Create a singleton
     private init() {
@@ -24,12 +24,13 @@ struct CoreDataManager {
         return dateF
     }()
     
-    var startOfCurrentMonth: Date {
+    var startOfCurrentMonth: Date = {
         let startDate = Date()
         let components = NSCalendar.current.dateComponents([.year, .month], from: startDate)
         let startOfMonth = NSCalendar.current.date(from: components)!
         return startOfMonth
-    }
+    } ()
+    
     
     public func fetchTransactions() -> [Transaction] {
         var transactions : [Transaction] = []

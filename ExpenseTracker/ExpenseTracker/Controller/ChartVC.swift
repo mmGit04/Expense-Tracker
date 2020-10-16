@@ -36,6 +36,7 @@ class ChartVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         categoriesTableView.dataSource = self
         categoriesTableView.delegate = self
+        categoriesTableView.tableFooterView = UIView()
     }
     
     override func viewDidAppear(_ animated: Bool) {

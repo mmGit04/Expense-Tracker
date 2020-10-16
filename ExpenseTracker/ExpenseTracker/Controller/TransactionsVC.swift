@@ -14,17 +14,13 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var currentBalanceLbl: UILabel!
     @IBOutlet weak var incomeLbl: UILabel!
     @IBOutlet weak var expenseLbl: UILabel!
+    @IBOutlet weak var currentDateLbl: UILabel!
     @IBOutlet weak var transTableView: UITableView!
     
     // Variables
     private var sortedTransactions: [Int:[Transaction]] = [:]
     private var keyArray: [Int] = []
-    private var startOfCurrentMonth: Date {
-        let startDate = Date()
-        let components = NSCalendar.current.dateComponents([.year, .month], from: startDate)
-        let startOfMonth = NSCalendar.current.date(from: components)!
-        return startOfMonth
-    }
+
     
     // View Controller life cycle methods
     override func viewDidLoad() {
@@ -33,6 +29,8 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         transTableView.delegate = self
         transTableView.dataSource = self
         transTableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
+        transTableView.tableFooterView = UIView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +71,26 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         keyArray.sort(by: >)
     }
     
+    @IBAction func changeMonthArrowPressed(_ sender: UIButton) {
+        var currentMonthDate = CoreDataManager.instance.startOfCurrentMonth
+        var dateComponent = DateComponents()
+        switch sender.tag {
+        case 0:
+            dateComponent.month = -1
+        case 1:
+            dateComponent.month = 1
+        default:
+            print("Wrong tag value")
+        }
+        CoreDataManager.instance.startOfCurrentMonth = Calendar.current.date(byAdding: dateComponent, to: currentMonthDate)!
+        
+        // Refresh the UIView
+        fetchSortedTransactions()
+        setupTopBarInfo()
+        transTableView.reloadData()
+    }
+    
+    
     // MARK: Setup View
     private func setupTopBarInfo() {
         var income = 0.0
@@ -89,6 +107,11 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         incomeLbl.text = "$ \(income)"
         expenseLbl.text = "$ \(expense)"
         currentBalanceLbl.text = String(income - expense)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy."
+
+        let date = dateFormatter.string(from: CoreDataManager.instance.startOfCurrentMonth)
+        currentDateLbl.text = date
     }
     
     // MARK: Table Data Source and Delegate Methods
@@ -124,7 +147,7 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     private func getDateForSection(for section: Int) -> String {
         var dateComp = DateComponents()
         dateComp.day = keyArray[section]
-        let dateSection = NSCalendar.current.date(byAdding: dateComp, to: startOfCurrentMonth)!
+        let dateSection = NSCalendar.current.date(byAdding: dateComp, to: CoreDataManager.instance.startOfCurrentMonth)!
         let df = DateFormatter()
         df.dateFormat = "yyyy/MM/dd"
         return df.string(from: dateSection)
