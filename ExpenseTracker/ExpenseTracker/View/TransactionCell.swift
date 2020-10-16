@@ -10,23 +10,10 @@ import UIKit
 
 class TransactionCell: UITableViewCell {
 
-    
     // Outlets
-    
-
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 
     func setupCell(amount: Double, note: String?, type: TransactionType, category: String) {
         amountLabel.text = "$ " + (String(format: "%.2f", amount))

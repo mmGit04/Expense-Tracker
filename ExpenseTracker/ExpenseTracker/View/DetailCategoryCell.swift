@@ -15,12 +15,6 @@ class DetailCategoryCell: UITableViewCell {
     @IBOutlet weak var amountLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     func setupCategory(for title: String, amount: Double, percent: Int, color: UIColor) {
         percentLbl.layer.cornerRadius = 6
         percentLbl.layer.borderWidth = 1.0
@@ -30,12 +24,5 @@ class DetailCategoryCell: UITableViewCell {
         amountLbl.text = "$ \(amount)"
         percentLbl.text = "\(percent)%"
         percentLbl.backgroundColor = color
-        
     }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        
-    }
-
 }

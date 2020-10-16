@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class CoreDataManager {
+struct CoreDataManager {
     
     static let instance = CoreDataManager()
     

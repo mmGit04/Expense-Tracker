@@ -11,7 +11,6 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     // Outlets
-
     @IBOutlet weak var titleLabel: UILabel!
     
     public func setupCategory(title: String) {
