@@ -20,7 +20,7 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     // Variables
     private var sortedTransactions: [Int:[Transaction]] = [:]
     private var keyArray: [Int] = []
-
+    
     
     // View Controller life cycle methods
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         transTableView.dataSource = self
         transTableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
         transTableView.tableFooterView = UIView()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +109,7 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         currentBalanceLbl.text = String(income - expense)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy."
-
+        
         let date = dateFormatter.string(from: CoreDataManager.instance.startOfCurrentMonth)
         currentDateLbl.text = date
     }
@@ -120,23 +120,21 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = transTableView.dequeueReusableCell(withIdentifier: "transactionCell") as? TransactionCell {
-            let transactions = sortedTransactions[keyArray[indexPath.section]]!
-            let transaction = transactions[indexPath.row]
-            cell.setupCell(amount: transaction.amount, note: transaction.note, type: TransactionType.init(rawValue: transaction.type!)!, category: transaction.categoryId?.title ?? "")
-            return cell
-        }
-        return UITableViewCell()
+        let cell = transTableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionCell
+        let transactions = sortedTransactions[keyArray[indexPath.section]]!
+        let transaction = transactions[indexPath.row]
+        cell.setupCell(amount: transaction.amount, note: transaction.note, type: TransactionType.init(rawValue: transaction.type!)!, category: transaction.categoryId?.title ?? "")
+        return cell
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerView = transTableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? SectionHeaderView {
-            let sumIncome = getSumForSection(for: section, type: TransactionType.income)
-            let sumExpense = getSumForSection(for: section, type: TransactionType.expense)
-            headerView.setupHeaderDetails(dateValue: getDateForSection(for: section),sectionIncome: sumIncome, sectionExpense: sumExpense )
-            return headerView
-        }
-        return UIView()
+        let headerView = transTableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as! SectionHeaderView
+        let sumIncome = getSumForSection(for: section, type: TransactionType.income)
+        let sumExpense = getSumForSection(for: section, type: TransactionType.expense)
+        headerView.setupHeaderDetails(dateValue: getDateForSection(for: section),sectionIncome: sumIncome, sectionExpense: sumExpense )
+        return headerView
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -166,18 +164,18 @@ class TransactionsVC: UIViewController, UITableViewDataSource, UITableViewDelega
         return sum
     }
     
-//
-////     Implement the footer for section devision
-//        func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//            return CGFloat(integerLiteral: 15)
-//        }
-//
-//        func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//            footerView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 0.2)
-//            return footerView
-//        }
-//
+    //
+    ////     Implement the footer for section devision
+    //        func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    //            return CGFloat(integerLiteral: 15)
+    //        }
+    //
+    //        func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    //            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    //            footerView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 0.2)
+    //            return footerView
+    //        }
+    //
     
     
 }

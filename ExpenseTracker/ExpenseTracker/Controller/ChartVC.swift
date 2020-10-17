@@ -149,11 +149,11 @@ class ChartVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = categoriesTableView.dequeueReusableCell(withIdentifier: "DetailCategoryCell") as? DetailCategoryCell {
-            let category = keyArray[indexPath.row]
-            cell.setupCategory(for: category.title!, amount: categoryAmount[category]!, percent: getPercentForAmount(amount: categoryAmount[category]!), color: currentSetOfColors[indexPath.row])
-            return cell
-        }
-        return UITableViewCell()
+        let cell = categoriesTableView.dequeueReusableCell(withIdentifier: "DetailCategoryCell") as! DetailCategoryCell
+        let category = keyArray[indexPath.row]
+        cell.setupCategory(for: category.title!, amount: categoryAmount[category]!, percent: getPercentForAmount(amount: categoryAmount[category]!), color: currentSetOfColors[indexPath.row])
+        return cell
+        
+        
     }
 }
