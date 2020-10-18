@@ -35,6 +35,9 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         categoryCollection.dataSource = self
         categoryCollection.delegate = self
         setupDateField()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(selectCategory(_:)))
+        tap.numberOfTapsRequired = 1
+        categoryCollection?.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,20 +119,36 @@ class AddItemVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         return UICollectionViewCell()
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        print("Highlighted")
-        if (indexPath.row == categories.count) {
-            presentAlert()
-        } else {
-            if selectedCategory == categories[indexPath.row] {
-                selectedCategory = nil
+    @objc func selectCategory(_ sender: UITapGestureRecognizer) {
+        let point = sender.location(in: categoryCollection)
+        if let indexPath = categoryCollection!.indexPathForItem(at: point) {
+            if (indexPath.row == categories.count) {
+                presentAlert()
             } else {
-                selectedCategory = categories[indexPath.row]
+                if selectedCategory == categories[indexPath.row] {
+                    selectedCategory = nil
+                } else {
+                    selectedCategory = categories[indexPath.row]
+                }
+                categoryCollection.reloadData()
             }
-            categoryCollection.reloadData()
         }
     }
+    
+    // MARK: Action on highlighting a category is replaced with tap gesture
+//    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+//        print("Highlighted")
+//        if (indexPath.row == categories.count) {
+//            presentAlert()
+//        } else {
+//            if selectedCategory == categories[indexPath.row] {
+//                selectedCategory = nil
+//            } else {
+//                selectedCategory = categories[indexPath.row]
+//            }
+//            categoryCollection.reloadData()
+//        }
+//    }
     
     private func presentAlert() {
         let alert = UIAlertController(title: "Add new category", message: nil , preferredStyle: .alert )
